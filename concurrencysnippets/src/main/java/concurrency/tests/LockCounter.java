@@ -37,5 +37,20 @@ public class LockCounter {
 
     }
 
+    public void addNoSync() {
+        for (int i = 0; i < 10; i++) {
+            this.counter += 20;
+            System.out.printf("%s: Unsync Adding 20 - %d %n", Thread.currentThread().getName(), this.counter);
+        }
+    }
+
+    public void addInterLock() {
+        synchronized (this) {
+            for (int i = 0; i < 10; i++) {
+                this.counter += 30;
+                System.out.printf("%s: Local lock Adding 30 - %d %n", Thread.currentThread().getName(), this.counter);
+            }
+        }
+    }
 
 }
